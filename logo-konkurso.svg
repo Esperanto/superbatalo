@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="37.884823mm"
+   width="47mm"
    height="8.3546762mm"
-   viewBox="0 0 37.884823 8.3546763"
+   viewBox="0 0 47 8.3546763"
    version="1.1"
    id="svg937"
    inkscape:version="0.92.4 (unknown)"
-   sodipodi:docname="logo.svg">
+   sodipodi:docname="logo-konkurso.svg">
   <defs
      id="defs931" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.82595713"
-     inkscape:cx="90.345803"
-     inkscape:cy="-13.082218"
+     inkscape:zoom="16.944458"
+     inkscape:cx="154.9801"
+     inkscape:cy="25.662585"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -39,7 +39,8 @@
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="0"
+     inkscape:snap-global="false" />
   <metadata
      id="metadata934">
     <rdf:RDF>
@@ -48,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -79,5 +80,33 @@
          x="35.676823"
          y="155.16316"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.11587429px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.34298956px">Superbatalo</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#008000;stroke-width:0.34881043;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 66.899182,151.61085 c 0.557802,-0.65624 2.823831,-0.69303 3.447257,0.0944"
+       id="path2258"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#008000;stroke-width:0.34881043;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 66.901193,151.85671 c -0.09843,4.13429 3.411427,4.134 3.444237,0.0325 -0.820295,1.18123 -2.886435,0.78776 -3.444237,-0.0325 z"
+       id="path2256"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#008000;stroke-width:0.34881043;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 67.298762,154.3411 c -0.413469,0.14312 -1.876516,-1.06549 -0.397568,-1.68569"
+       id="path2249"
+       inkscape:connector-curvature="0" />
+    <path
+       id="path2260"
+       d="m 69.930509,154.40471 c 0.413469,0.14312 1.876516,-1.06549 0.397568,-1.68569"
+       style="fill:none;fill-rule:evenodd;stroke:#008000;stroke-width:0.34881043;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       sodipodi:nodetypes="ccc"
+       inkscape:connector-curvature="0"
+       id="path2262"
+       d="m 67.249037,156.0954 c 0.637315,-1.21282 1.949185,-1.28142 2.604415,0.0625 -0.269878,0.13494 -1.839762,0.29731 -2.604415,-0.0625 z"
+       style="fill:none;fill-rule:evenodd;stroke:#008000;stroke-width:0.34881043;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
 </svg>

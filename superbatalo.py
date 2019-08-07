@@ -134,6 +134,6 @@ cr.scale(POINTS_PER_MM, POINTS_PER_MM)
 # Use ½mm line width
 cr.set_line_width(0.5)
 
-render_file(cr, "roloj.txt", "logo.svg")
-render_file(cr, "konkursoj.txt", "logo.svg")
-render_file(cr, "povoj.txt", "logo.svg")
+render_file(cr, "roloj.txt", "logo-rolo.svg")
+render_file(cr, "konkursoj.txt", "logo-konkurso.svg")
+render_file(cr, "povoj.txt", "logo-povo.svg")
