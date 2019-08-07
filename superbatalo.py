@@ -29,6 +29,10 @@ CARD_HEIGHT = (PAGE_HEIGHT - MARGIN * 2) / N_ROWS
 
 LOGO = Rsvg.Handle.new_from_file('logo.svg')
 
+LOGO_DIM = LOGO.get_dimensions()
+LOGO_SCALE = (CARD_WIDTH - INNER_MARGIN * 2) / LOGO_DIM.width
+PARAGRAPH_HEIGHT = CARD_HEIGHT - INNER_MARGIN * 2 - LOGO_DIM.height * LOGO_SCALE
+
 def start_page(cr):
     for i in range(N_COLUMNS + 1):
         cr.move_to(i * CARD_WIDTH + MARGIN, MARGIN)
@@ -40,35 +44,39 @@ def start_page(cr):
     cr.stroke()
 
 def draw_logo(cr, x, y):
-    dim = LOGO.get_dimensions()
-    scale = (CARD_WIDTH - INNER_MARGIN * 2) / dim.width
-
     cr.save()
     cr.translate(MARGIN + x * CARD_WIDTH + INNER_MARGIN,
                  MARGIN + (y + 1) * CARD_HEIGHT -
-                 dim.height * scale -
+                 LOGO_DIM.height * LOGO_SCALE -
                  INNER_MARGIN)
-    cr.scale(scale, scale)
+    cr.scale(LOGO_SCALE, LOGO_SCALE)
     LOGO.render_cairo(cr)
     cr.restore()
 
-def render_paragraph(cr, x, y, width, text, font = "Sans 12"):
+def render_paragraph(cr, x, y, width, height, text):
+    font_size = 12
+
+    while True:
+        layout = PangoCairo.create_layout(cr)
+        fd = Pango.FontDescription.from_string("Sans {}".format(font_size))
+        layout.set_font_description(fd)
+        layout.set_width(width * POINTS_PER_MM * Pango.SCALE)
+        layout.set_text(text, -1)
+
+        (ink_rect, logical_rect) = layout.get_pixel_extents()
+
+        if (ink_rect.height / POINTS_PER_MM <= height and
+            ink_rect.width / POINTS_PER_MM) <= width:
+            break
+
+        font_size *= 0.75
+
     cr.save()
 
     cr.move_to(x, y)
 
     # Remove the mm scale
     cr.scale(1.0 / POINTS_PER_MM, 1.0 / POINTS_PER_MM)
-
-    layout = PangoCairo.create_layout(cr)
-    fd = Pango.FontDescription.from_string(font)
-    layout.set_font_description(fd)
-    layout.set_width(width * POINTS_PER_MM * Pango.SCALE)
-    layout.set_text(text, -1)
-
-    (ink_rect, logical_rect) = layout.get_pixel_extents()
-
-    #cr.rel_move_to(0, -logical_rect.height)
 
     PangoCairo.show_layout(cr, layout)
 
@@ -82,6 +90,7 @@ def draw_card(cr, x, y, text):
                      MARGIN + x * CARD_WIDTH + INNER_MARGIN,
                      MARGIN + y * CARD_HEIGHT + INNER_MARGIN,
                      CARD_WIDTH - INNER_MARGIN * 2,
+                     PARAGRAPH_HEIGHT,
                      text)
 
 def render_file(cr, filename):
