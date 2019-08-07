@@ -27,12 +27,6 @@ CARDS_PER_PAGE = N_COLUMNS * N_ROWS
 CARD_WIDTH = (PAGE_WIDTH - MARGIN * 2) / N_COLUMNS
 CARD_HEIGHT = (PAGE_HEIGHT - MARGIN * 2) / N_ROWS
 
-LOGO = Rsvg.Handle.new_from_file('logo.svg')
-
-LOGO_DIM = LOGO.get_dimensions()
-LOGO_SCALE = (CARD_WIDTH - INNER_MARGIN * 2) / LOGO_DIM.width
-PARAGRAPH_HEIGHT = CARD_HEIGHT - INNER_MARGIN * 2 - LOGO_DIM.height * LOGO_SCALE
-
 def start_page(cr):
     for i in range(N_COLUMNS + 1):
         cr.move_to(i * CARD_WIDTH + MARGIN, MARGIN)
@@ -42,16 +36,6 @@ def start_page(cr):
         cr.rel_line_to(PAGE_WIDTH - MARGIN * 2, 0)
 
     cr.stroke()
-
-def draw_logo(cr, x, y):
-    cr.save()
-    cr.translate(MARGIN + x * CARD_WIDTH + INNER_MARGIN,
-                 MARGIN + (y + 1) * CARD_HEIGHT -
-                 LOGO_DIM.height * LOGO_SCALE -
-                 INNER_MARGIN)
-    cr.scale(LOGO_SCALE, LOGO_SCALE)
-    LOGO.render_cairo(cr)
-    cr.restore()
 
 def render_paragraph(cr, x, y, width, height, text):
     font_size = 12
@@ -84,16 +68,33 @@ def render_paragraph(cr, x, y, width, height, text):
 
     return logical_rect.height / POINTS_PER_MM
 
-def draw_card(cr, x, y, text):
-    draw_logo(cr, x, y)
+def draw_card(cr, x, y, text, logo):
+    logo_dim = logo.get_dimensions()
+    logo_scale = (CARD_WIDTH - INNER_MARGIN * 2) / logo_dim.width
+
+    cr.save()
+    cr.translate(MARGIN + x * CARD_WIDTH + INNER_MARGIN,
+                 MARGIN + (y + 1) * CARD_HEIGHT -
+                 logo_dim.height * logo_scale -
+                 INNER_MARGIN)
+    cr.scale(logo_scale, logo_scale)
+    logo.render_cairo(cr)
+    cr.restore()
+
+    paragraph_height = (CARD_HEIGHT -
+                        INNER_MARGIN * 2 -
+                        logo_dim.height * logo_scale)
+
     render_paragraph(cr,
                      MARGIN + x * CARD_WIDTH + INNER_MARGIN,
                      MARGIN + y * CARD_HEIGHT + INNER_MARGIN,
                      CARD_WIDTH - INNER_MARGIN * 2,
-                     PARAGRAPH_HEIGHT,
+                     paragraph_height,
                      text)
 
-def render_file(cr, filename):
+def render_file(cr, filename, logo_file):
+    logo = Rsvg.Handle.new_from_file(logo_file)
+
     with open(filename, 'rt') as f:
         card_num = 0
 
@@ -110,7 +111,8 @@ def render_file(cr, filename):
             draw_card(cr,
                       in_page % N_COLUMNS,
                       in_page // N_COLUMNS,
-                      line)
+                      line,
+                      logo)
 
             card_num += 1
 
@@ -132,6 +134,6 @@ cr.scale(POINTS_PER_MM, POINTS_PER_MM)
 # Use ½mm line width
 cr.set_line_width(0.5)
 
-render_file(cr, "roloj.txt")
-render_file(cr, "konkursoj.txt")
-render_file(cr, "povoj.txt")
+render_file(cr, "roloj.txt", "logo.svg")
+render_file(cr, "konkursoj.txt", "logo.svg")
+render_file(cr, "povoj.txt", "logo.svg")
