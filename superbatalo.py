@@ -92,7 +92,40 @@ def draw_card(cr, x, y, text, logo):
                      paragraph_height,
                      text)
 
-def render_file(cr, filename, logo_file):
+class Renderer:
+    def __init__(self):
+        surface = cairo.PDFSurface("superbatalo.pdf",
+                                   PAGE_WIDTH * POINTS_PER_MM,
+                                   PAGE_HEIGHT * POINTS_PER_MM)
+
+        self.cr = cairo.Context(surface)
+
+        # Use mm for the units from now on
+        self.cr.scale(POINTS_PER_MM, POINTS_PER_MM)
+
+        # Use ½mm line width
+        self.cr.set_line_width(0.5)
+
+        self.card_num = 0
+
+    def render(self, text, logo):
+        in_page = self.card_num % CARDS_PER_PAGE
+
+        if in_page == 0:
+            start_page(self.cr)
+
+        draw_card(self.cr,
+                  in_page % N_COLUMNS,
+                  in_page // N_COLUMNS,
+                  text,
+                  logo)
+
+        self.card_num += 1
+
+        if self.card_num % CARDS_PER_PAGE == 0:
+            self.cr.show_page()
+
+def render_file(renderer, filename, logo_file):
     logo = Rsvg.Handle.new_from_file(logo_file)
 
     with open(filename, 'rt') as f:
@@ -103,37 +136,10 @@ def render_file(cr, filename, logo_file):
             if line.startswith('#') or len(line) <= 0:
                 continue
 
-            in_page = card_num % CARDS_PER_PAGE
+            renderer.render(line, logo)
 
-            if in_page == 0:
-                start_page(cr)
+renderer = Renderer()
 
-            draw_card(cr,
-                      in_page % N_COLUMNS,
-                      in_page // N_COLUMNS,
-                      line,
-                      logo)
-
-            card_num += 1
-
-            if card_num % CARDS_PER_PAGE == 0:
-                cr.show_page()
-
-        if card_num % CARDS_PER_PAGE != 0:
-            cr.show_page()
-
-surface = cairo.PDFSurface("superbatalo.pdf",
-                           PAGE_WIDTH * POINTS_PER_MM,
-                           PAGE_HEIGHT * POINTS_PER_MM)
-
-cr = cairo.Context(surface)
-
-# Use mm for the units from now on
-cr.scale(POINTS_PER_MM, POINTS_PER_MM)
-
-# Use ½mm line width
-cr.set_line_width(0.5)
-
-render_file(cr, "roloj.txt", "logo-rolo.svg")
-render_file(cr, "konkursoj.txt", "logo-konkurso.svg")
-render_file(cr, "povoj.txt", "logo-povo.svg")
+render_file(renderer, "roloj.txt", "logo-rolo.svg")
+render_file(renderer, "konkursoj.txt", "logo-konkurso.svg")
+render_file(renderer, "povoj.txt", "logo-povo.svg")
