@@ -13,7 +13,7 @@ Armita per pikdrata reto
 Tre bela
 Vestaĵoj estas tro larĝaj
 Ĵetas sandviĉojn
-Portas kvaliran kirason
+Portas kavaliran kirason
 Armita per ĉaspafilo
 Cento da ili
 Armita per malgrandiga pafilo
@@ -25,7 +25,7 @@ Rajdas leonon
 Kaptita en terpomsako
 Rajdas ____ [Prenu hazardan blankan karton]
 Povas vidi nur movantajn objektojn
-[Prenu hazardajn oranĝajn kartojn kaj uzu ilin]
+[Prenu hazardajn nigrajn kartojn kaj uzu ilin]
 Blinda
 Havas 1000 jarojn
 Tre tre stulta
@@ -36,7 +36,7 @@ Treege dika
 Kun alergio kontraŭ akvo
 Tre maljuna
 300 metrojn alta
-Armita per la pafarko de amoro
+Armita per la pafarko de Amoro
 Rajdas militelefanton
 Robota
 Nevidebla
